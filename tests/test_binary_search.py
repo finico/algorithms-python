@@ -3,7 +3,7 @@ from random import randint
 
 from big_o import big_o, complexities
 
-from binary_search import binary_search
+from src.binary_search import binary_search
 
 
 class TestBinarySearch(unittest.TestCase):

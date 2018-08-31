@@ -7,4 +7,4 @@ lint:
 	@pycodestyle .
 
 test: clean lint
-	python3 -m unittest
+	pytest --cov=src tests/
