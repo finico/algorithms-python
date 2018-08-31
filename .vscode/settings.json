@@ -7,5 +7,5 @@
     "python.unitTest.nosetestsEnabled": false,
     "python.unitTest.pyTestArgs": [
         "--no-cov"
-    ],
+    ]
 }
