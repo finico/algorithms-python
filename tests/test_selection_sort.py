@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from big_o import big_o, complexities, datagen
 
-from selection_sort import selection_sort
+from src.selection_sort import selection_sort
 
 
 class TestSelectionSort(TestCase):
