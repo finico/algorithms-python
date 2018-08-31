@@ -18,6 +18,6 @@ class TestSelectionSort(TestCase):
         best, _ = big_o(
             selection_sort,
             lambda x: datagen.integers(x // 100, 0, x),
-            n_repeats=100
+            n_repeats=10
         )
         self.assertIsInstance(best, complexities.Quadratic)
