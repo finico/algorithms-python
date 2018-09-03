@@ -4,5 +4,5 @@ def recursive_max(arr):
     head = arr[0]
     if len(arr) == 1:
         return head
-    x = recursive_max(arr[1:])
-    return head if head > x else x
+    guess_max = recursive_max(arr[1:])
+    return head if head > guess_max else guess_max
