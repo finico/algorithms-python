@@ -3,6 +3,11 @@ def quicksort(arr):
         return arr
 
     pivot = arr[0]
-    less = [i for i in arr[1:] if i <= pivot]
-    greater = [i for i in arr[1:] if i > pivot]
+    less, greater = [], []
+    for i in range(1, len(arr)):
+        x = arr[i]
+        if x <= pivot:
+            less.append(x)
+        else:
+            greater.append(x)
     return quicksort(less) + [pivot] + quicksort(greater)
