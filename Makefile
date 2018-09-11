@@ -7,4 +7,4 @@ lint:
 	@pycodestyle .
 
 test: clean lint
-	pytest --cov=src tests/
+	pytest --cov=src --cov-report=term --cov-report=xml tests/
