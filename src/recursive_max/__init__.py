@@ -1,5 +1,6 @@
 def recursive_max(arr):
-    assert arr, "List can not be empty"
+    if not arr:
+        raise AssertionError("List can not be empty")
 
     head = arr[0]
     if len(arr) == 1:
