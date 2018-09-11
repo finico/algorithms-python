@@ -18,7 +18,7 @@ class TestQuicksort(unittest.TestCase):
     def test_complexity(self):
         best, _ = big_o(
             quicksort,
-            lambda x: datagen.integers(x, 0, x),
-            n_repeats=2
+            lambda x: datagen.integers(x // 100, 0, x // 100),
+            n_repeats=100
         )
         self.assertIsInstance(best, complexities.Linearithmic)  # O(n log n)
