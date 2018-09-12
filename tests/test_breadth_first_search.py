@@ -8,14 +8,10 @@ class TestBreadthFirstSearch(unittest.TestCase):
     def setUp(self):
         self.fixture = {
             "first": ["second", "third"],
-            "second": ["third", "fourth", "me-1", "sixth"],
+            "second": ["third", "fourth", "sixth"],
             "third": ["first", "fifth"],
-            "fourth": ["me-2"],
-            "fifth": ["second", "seventh"],
-            "sixth": [],
-            "seventh": [],
-            "me-1": [],
-            "me-2": []
+            "fourth": ["eighth"],
+            "fifth": ["second", "seventh"]
         }
 
     def test_empty(self):
@@ -59,7 +55,7 @@ class TestBreadthFirstSearch(unittest.TestCase):
         )
 
     def test_is_bread_first(self):
-        spy = Mock(wraps=lambda x: x.startswith("me"))
+        spy = Mock(wraps=lambda x: x == "eighth")
         result = breadth_first_search(self.fixture, "first", spy)
 
         self.assertEqual(result, True)
@@ -67,5 +63,8 @@ class TestBreadthFirstSearch(unittest.TestCase):
             call("second"),
             call("third"),
             call("fourth"),
-            call("me-1")
+            call("sixth"),
+            call("first"),
+            call("fifth"),
+            call("eighth")
         ])

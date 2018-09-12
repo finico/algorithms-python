@@ -14,8 +14,8 @@ def breadth_first_search(graph, root_node, fn):
             if fn(node):
                 return True
 
+            checked[node] = True
             children = graph.get(node)
             if children:
                 search_queue.extend(children)
-                checked[node] = True
     return False
