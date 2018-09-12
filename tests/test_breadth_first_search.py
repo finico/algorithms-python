@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import Mock, call
 
 from src.breadth_first_search import breadth_first_search
 
@@ -6,20 +7,23 @@ from src.breadth_first_search import breadth_first_search
 class TestBreadthFirstSearch(unittest.TestCase):
     def setUp(self):
         self.fixture = {
-            "test": ["test1", "test2"],
-            "test1": ["test2", "test3", "found"],
-            "test2": ["test4"],
-            "test3": [],
-            "test4": [],
-            "found": []
+            "first": ["second", "third"],
+            "second": ["third", "fourth", "me-1", "sixth"],
+            "third": ["first", "fifth"],
+            "fourth": ["me-2"],
+            "fifth": ["second", "seventh"],
+            "sixth": [],
+            "seventh": [],
+            "me-1": [],
+            "me-2": []
         }
 
     def test_empty(self):
         self.assertEqual(
             breadth_first_search(
                 {},
-                "test",
-                lambda x: x == "found"
+                "first",
+                lambda x: x == "second"
             ),
             False
         )
@@ -28,8 +32,8 @@ class TestBreadthFirstSearch(unittest.TestCase):
         self.assertEqual(
             breadth_first_search(
                 self.fixture,
-                "test",
-                lambda x: x == "found"
+                "first",
+                lambda x: x == "seventh"
             ),
             True
         )
@@ -38,8 +42,8 @@ class TestBreadthFirstSearch(unittest.TestCase):
         self.assertEqual(
             breadth_first_search(
                 self.fixture,
-                "test2",
-                lambda x: x == "found"
+                "fourth",
+                lambda x: x == "fifth"
             ),
             False
         )
@@ -48,8 +52,20 @@ class TestBreadthFirstSearch(unittest.TestCase):
         self.assertEqual(
             breadth_first_search(
                 self.fixture,
-                "test",
+                "first",
                 lambda x: x == "no"
             ),
             False
         )
+
+    def test_is_bread_first(self):
+        spy = Mock(wraps=lambda x: x.startswith("me"))
+        result = breadth_first_search(self.fixture, "first", spy)
+
+        self.assertEqual(result, True)
+        self.assertEqual(spy.mock_calls, [
+            call("second"),
+            call("third"),
+            call("fourth"),
+            call("me-1")
+        ])

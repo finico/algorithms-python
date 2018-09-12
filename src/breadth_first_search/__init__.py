@@ -5,8 +5,7 @@ def breadth_first_search(graph, root_node, fn):
     if not graph:
         return False
 
-    search_queue = deque()
-    search_queue += graph[root_node]
+    search_queue = deque(graph.get(root_node, []))
     checked = {}
 
     while search_queue:
@@ -14,7 +13,9 @@ def breadth_first_search(graph, root_node, fn):
         if not checked.get(node):
             if fn(node):
                 return True
-            else:
-                search_queue += graph[node]
+
+            children = graph.get(node)
+            if children:
+                search_queue.extend(children)
                 checked[node] = True
     return False
